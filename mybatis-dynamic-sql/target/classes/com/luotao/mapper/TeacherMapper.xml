@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- MyBatis配置文件约束声明 -->
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--在 mybatis-config.xml 中自动注册了 com.luotao.domian以及子包下类的别名,也开启了驼峰命名-->
+<!-- 映射器定义：将XML映射到EmpMapper接口，实现接口方法与SQL的绑定 -->
+<mapper namespace="com.luotao.mapper.TeacherMapper">
+
+</mapper>

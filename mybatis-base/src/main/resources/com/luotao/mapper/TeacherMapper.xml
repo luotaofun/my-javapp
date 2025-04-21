@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- MyBatis配置文件约束声明 -->
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--在 mybatis-config.xml 中自动注册了 com.luotao.domian以及子包下类的别名,也开启了驼峰命名-->
+<!-- 映射器定义：将XML映射到EmpMapper接口，实现接口方法与SQL的绑定 -->
+<mapper namespace="com.luotao.mapper.TeacherMapper">
+
+    <select id="getTeacherList" resultMap="teacherResultMap">
+        select *
+        from t_teacher as tea
+                 left join
+             t_stu as stu on tea.tid = stu.teacherId
+                 left join
+             t_teacher_profile AS tprof ON tea.tid = tprof.teacher_id
+    </select>
+    <!--   mapUnderscoreToCamelCase已经满足不了需求，所以定义描述实体与查询结果的映射规则resultMap。-->
+    <resultMap id="teacherResultMap" type="teacher">
+        <id column="tid" property="tId"/>
+        <result column="tname" property="tName"/>
+        <!-- 一对一关联：教师与教师资料
+            方式一：<association> 标签将查询结果中的某些列映射到一个 Java 类的属性上。
+            方式二：给列起别名
+         -->
+        <association property="teacherProfile" javaType="teacherProfile">
+            <id column="profile_id" property="profileId"/>
+            <result column="teacher_id" property="teacherId"/>
+            <result column="profile_info" property="profileInfo"/>
+        </association>
+        <!-- collection处理一对多关联：教师与学生
+            <collection> 标签：指定 Teacher 类中的一个集合属性，该属性用于存储与 Teacher 关联的多个 Student 对象。
+            ofType="student"：指定集合中元素的类型。-->
+        <collection property="studentList" ofType="student">
+            <id column="sid" property="sId"/>
+            <result column="sname" property="sName"/>
+        </collection>
+
+    </resultMap>
+
+    <!--一对一关联：教师与教师资料
+        方式二：除了使用 <resultMap> 和 <association> 标签来处理复杂对象映射外，还可以通过给列起别名，直接将查询结果中的列名映射到 Java 对象的属性上
+        数据库列名 as 'Java对象.属性名'-->
+    <select id="getTeacherListByAs" resultType="teacher">
+        select tea.*,
+               tprof.profile_id as 'teacherProfile.profileId',
+               tprof.teacher_id as 'teacherProfile.teacherId',
+               tprof.profile_info as 'teacherProfile.profileInfo'
+        from t_teacher as tea
+                 left join
+             t_teacher_profile AS tprof ON tea.tid = tprof.teacher_id
+    </select>
+
+    <!--
+        演示分步查询即将一个复杂的查询拆分为多个简单的查询：1.通过tid查某位老师。2.通过查询结果的tid查这位老师名下的学生(引用StudentMapper中的getStudentListByTeacherId)
+        之后可以到MyBatis配置文件中启用延迟加载lazyLoadingEnabled-->
+    <select id="getTeacherByIdStep" resultMap="teacherResultMapByStep">
+        select * from t_teacher where tid=#{tid}
+    </select>
+    <resultMap id="teacherResultMapByStep" type="teacher">
+        <id column="tid" property="tId"/>
+        <result column="tname" property="tName"/>
+        <!--column="tid" 将getTeacherByIdStep查询结果中的 tid 列值作为参数传递给 getStudentListByTeacherId 方法。-->
+        <collection property="studentList"  select="com.luotao.mapper.StudentMapper.getStudentListByTeacherId" column="tid"/>
+    </resultMap>
+</mapper>

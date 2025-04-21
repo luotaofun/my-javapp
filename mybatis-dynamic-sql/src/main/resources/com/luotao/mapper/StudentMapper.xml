@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- MyBatis配置文件约束声明 -->
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--在 mybatis-config.xml 中自动注册了 com.luotao.domian以及子包下类的别名,也开启了驼峰命名-->
+<!-- 映射器定义：将XML映射到EmpMapper接口，实现接口方法与SQL的绑定 -->
+<mapper namespace="com.luotao.mapper.StudentMapper">
+    <!--使用二级缓存（基于命名空间，适用读多写少的场景，二级缓存是跨sqlsession的，因此在对同一张表更新、插入或删除操作后，二级缓存会被清空，需要手动刷新缓存），需要在MyBatis配置文件中启用。实体类需要实现serializable接口,因为二级缓存会将对象序列化存储-->
+    <cache/>
+
+    <!--将重复的sql定义为独立的SQL 片段，<include> 标签用于引用已定义的 SQL 片段，通过 refid 属性指定要引用的片段的 id。-->
+    <sql id="allColumns">
+        sid,sname
+    </sql>
+    <!-- 查询符合条件的所有学生信息
+         id: 对应Mapper接口方法名
+         resultType: 返回结果映射的实体类,在 XML 配置中，resultType 必须显式声明
+        parameterType：
+            MyBatis 会根据方法签名自动推断参数类型,可以省略parameterType。
+            如果有多个参数，mybatis会将所有参数封装为一个 Map，键为 @Param 指定的名称，值为参数的实际值，比如parameterType="java.util.Map"，SQL 语句的参数是一个 Map，可以通过 #{abc} 和 ${tableName} 访问 Map 中的值。
+            如果是单个参数，参数是基本类型（如 int、String），MyBatis 会直接使用该参数parameterType=基本类型。参数是对象（如 Student），parameterType=Student。
+            如果没有使用 @Param 注解，MyBatis 会使用默认的键名（如 param1、param2 等）
+            MyBatis 在某些情况下会忽略 parameterType 的错误，只要 SQL 语句中的参数名和方法参数名匹配即可
+            -->
+    <select id="getStudentList" resultType="student" parameterType="map">
+        select
+        <include refid="allColumns"></include>
+        from
+        ${tableName}
+        <!--<trim> 标签用于控制 SQL 语句中条件部分的前缀和后缀
+        prefix：指定要动态添加的前缀。
+        prefixOverrides：指定要动态去掉的前缀，使用“|”分隔可能的多个值。
+        suffix：指定要动态添加的后缀。
+        suffixOverrides：指定要动态去掉的后缀，使用“|”分隔可能的多个值。-->
+        <trim prefix="where" prefixOverrides="or|and" suffixOverrides="or|and">
+            <!--标签：类似于 Java 中的 switch 语句，只执行第一个满足条件的 <when>，如果都不满足则执行 <otherwise>。-->
+            <choose>
+                <when test="studentId != null">
+                    or sid=#{studentId}
+                </when>
+                <when test="studentIds != null and !studentIds.isEmpty() ">
+                    <foreach collection="studentIds" item="id" open="or sid in (" separator="," close=")" >
+                        #{id}
+                    </foreach>
+                </when>
+                <otherwise>
+                </otherwise>
+            </choose>
+            <!--<if> 标签中的 test 表达式中的参数名指的是 方法参数 中通过 @Param 注解指定的参数名
+                当 SQL 语句中包含特殊字符（如 <、>、& 等）时，可以使用 <![CDATA[]]> 包裹 SQL 语句。-->
+            <if test="studentName != null and studentName != '' ">
+                or sname like concat('%',#{studentName},'%')
+            </if>
+        </trim>
+    </select>
+</mapper>

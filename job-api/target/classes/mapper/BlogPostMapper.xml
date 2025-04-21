@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.luotao.job.mapper.BlogPostMapper">
+
+    <resultMap id="BaseResultMap" type="com.luotao.job.domain.BlogPost">
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="title" column="title" jdbcType="VARCHAR"/>
+        <result property="content" column="content" jdbcType="VARCHAR"/>
+        <result property="summary" column="summary" jdbcType="VARCHAR"/>
+        <result property="coverImage" column="cover_image" jdbcType="VARCHAR"/>
+        <result property="categoryId" column="category_id" jdbcType="BIGINT"/>
+        <result property="authorId" column="author_id" jdbcType="BIGINT"/>
+        <result property="status" column="status" jdbcType="TINYINT"/>
+        <result property="viewCount" column="view_count" jdbcType="INTEGER"/>
+        <result property="commentCount" column="comment_count" jdbcType="INTEGER"/>
+        <result property="likeCount" column="like_count" jdbcType="INTEGER"/>
+        <result property="isTop" column="is_top" jdbcType="TINYINT"/>
+        <result property="isOriginal" column="is_original" jdbcType="TINYINT"/>
+        <result property="sourceUrl" column="source_url" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,title,content,
+        summary,cover_image,category_id,
+        author_id,status,view_count,
+        comment_count,like_count,is_top,
+        is_original,source_url,create_time,
+        update_time
+    </sql>
+
+
+    <!-- 分页查询文章列表 -->
+    <select id="selectPostList" resultType="com.luotao.job.vo.BlogPostListVo">
+        SELECT
+        p.id,
+        p.title,
+        p.content,
+        p.summary,
+        p.cover_image,
+        p.category_id,
+        c.name as category_name,
+        p.author_id,
+        u.username as author_name,
+        u.avatar as author_avatar,
+        p.view_count,
+        p.comment_count,
+        p.like_count,
+        p.is_top,
+        p.is_original,
+        p.create_time,
+        p.update_time,
+        p.status
+        FROM
+        blog_post p
+        LEFT JOIN
+        blog_category c ON p.category_id = c.id
+        LEFT JOIN
+        user u ON p.author_id = u.id
+        <if test="tagId != null">
+            INNER JOIN
+            blog_post_tag pt ON p.id = pt.post_id AND pt.tag_id = #{tagId}
+        </if>
+        WHERE
+        1 = 1
+        <if test="status != null">
+            AND p.status = #{status}
+        </if>
+        <if test="categoryId != null">
+            AND p.category_id = #{categoryId}
+        </if>
+        <if test="keyword != null and keyword != ''">
+            AND (
+            p.title LIKE CONCAT('%', #{keyword}, '%')
+            OR p.summary LIKE CONCAT('%', #{keyword}, '%')
+            OR p.content LIKE CONCAT('%', #{keyword}, '%')
+            )
+        </if>
+        <if test="title != null and title != ''">
+            AND p.title LIKE CONCAT('%', #{title}, '%')
+        </if>
+        <if test="authorId != null">
+            AND p.author_id =#{authorId}
+        </if>
+        ORDER BY
+        p.is_top DESC,
+        p.create_time DESC
+    </select>
+
+    <!-- 获取作者信息 -->
+    <select id="getAuthorInfo" resultType="com.luotao.job.vo.BlogAuthorVo">
+        SELECT
+            u.id,
+            u.username,
+            u.nickname,
+            u.email,
+            u.avatar,
+            u.status,
+            u.role,
+            u.description,
+            u.last_login AS lastLogin,
+            u.create_time AS createTime,
+            u.social_links as socialLinks
+        FROM
+            user u
+        WHERE
+            u.id = #{authorId}
+    </select>
+
+
+<!--    用 resultMap 定义映射规则,识别数据库查询结果中的列名与 Map 键的对应关系。&ndash;&gt;-->
+    <resultMap id="AuthorStatisticsResultMap" type="java.util.Map" >
+        <result property="articleCount" column="articleCount" javaType="Long"/>
+        <result property="categoryCount" column="categoryCount" javaType="Long"/>
+        <result property="tagCount" column="tagCount" javaType="Long"/>
+        <result property="totalViews" column="totalViews" javaType="Long"/>
+        <result property="totalComments" column="totalComments" javaType="Long"/>
+        <result property="totalLikes" column="totalLikes" javaType="Long"/>
+        <result property="lastPostTime" column="lastPostTime" javaType="java.time.LocalDateTime"/>
+    </resultMap>
+    <!-- 获取作者的文章统计信息 -->
+<!--    <select id="getAuthorStatistics" resultType="map">-->
+    <select id="getAuthorStatistics" resultMap="AuthorStatisticsResultMap">
+        SELECT
+            COUNT(p.id) AS articleCount,
+            COUNT(DISTINCT p.category_id) AS categoryCount,
+            (
+                SELECT COUNT(DISTINCT tag_id)
+                FROM blog_post_tag pt
+                         JOIN blog_post p ON pt.post_id = p.id
+                WHERE p.author_id = #{authorId}
+            ) AS tagCount,
+            SUM(p.view_count)             AS totalViews,
+            SUM(p.comment_count)          AS totalComments,
+            SUM(p.like_count)             AS totalLikes,
+            MAX(p.create_time) AS lastPostTime
+        FROM
+            blog_post p
+        WHERE
+            p.author_id = #{authorId}
+          AND p.status = 1
+    </select>
+
+
+    <!-- 获取作者的博客文章列表 -->
+    <select id="getAuthorPosts" resultType="com.luotao.job.domain.BlogPost">
+        SELECT
+            p.id,
+            p.title,
+            p.summary,
+            p.cover_image AS coverImage,
+            p.category_id AS categoryId,
+            c.name AS categoryName,
+            p.author_id AS authorId,
+            p.status,
+            p.view_count AS viewCount,
+            p.comment_count AS commentCount,
+            p.like_count AS likeCount,
+            p.is_top AS isTop,
+            p.is_original AS isOriginal,
+            p.create_time AS createTime,
+            p.update_time AS updateTime
+
+        FROM
+            blog_post p
+                LEFT JOIN
+            blog_category c ON p.category_id = c.id
+        WHERE
+            p.author_id = #{authorId}
+          AND p.status = 1
+        ORDER BY
+            p.view_count DESC,
+            p.is_top DESC,
+            p.create_time DESC
+            LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <!-- 获取作者的文章总数 -->
+    <select id="countAuthorPosts" resultType="java.lang.Long">
+        SELECT
+            COUNT(id)
+        FROM
+            blog_post
+        WHERE
+            author_id = #{authorId}
+          AND status = 1
+    </select>
+
+    <!-- 获取文章的标签 -->
+    <select id="getPostTags" resultType="com.luotao.job.vo.BlogAuthorVo">
+        SELECT
+            t.id,
+            t.name
+        FROM
+            blog_tag t
+                JOIN
+            blog_post_tag pt ON t.id = pt.tag_id
+        WHERE
+            pt.post_id = #{postId}
+    </select>
+
+    <!-- 获取作者的热门标签 -->
+    <select id="getAuthorPopularTags" resultType="java.util.Map">
+        SELECT
+            t.id,
+            t.name,
+            COUNT(pt.post_id) AS postCount
+        FROM
+            blog_tag t
+                JOIN
+            blog_post_tag pt ON t.id = pt.tag_id
+                JOIN
+            blog_post p ON pt.post_id = p.id
+        WHERE
+            p.author_id = #{authorId}
+          AND p.status = 1
+        GROUP BY
+            t.id
+        ORDER BY
+            postCount DESC
+            LIMIT #{limit}
+    </select>
+
+
+
+</mapper>

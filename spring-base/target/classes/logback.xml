@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- XML 文件的版本和编码声明 -->
+<configuration debug="true">
+    <!-- 定义一个名为 STDOUT 的 Appender，用于将日志输出到控制台 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- 编码器，用于格式化日志输出 -->
+        <encoder>
+            <!-- 日志输出格式：
+                 - %d{HH:mm:ss.SSS}：时间戳（时:分:秒.毫秒）
+                 - %-5level：日志级别，左对齐并占位 5 个字符
+                 - %thread：线程名
+                 - %logger：日志记录器名称
+                 - %msg：日志消息
+                 - %n：换行符
+            -->
+            <pattern>[%d{HH:mm:ss.SSS}] [%-5level] [%thread] [%logger] [%msg]%n</pattern>
+            <!-- 指定字符集为 UTF-8 -->
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!-- 根日志记录器配置，日志级别为 DEBUG -->
+    <root level="DEBUG">
+        <!-- 引用 STDOUT Appender，表示根日志记录器的日志将输出到控制台 -->
+        <appender-ref ref="STDOUT" />
+    </root>
+
+    <!-- 定义一个名为 com.luotao 的日志记录器，日志级别为 DEBUG -->
+    <logger name="com.luotao" level="DEBUG" />
+
+</configuration>

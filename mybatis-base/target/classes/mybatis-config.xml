@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <settings>
+        <!--    注册logback配置文件-->
+        <setting name="logImpl" value="SLF4J"/>
+        <!--    开启驼峰命名,这样可以不用编写resultMap,mybatis自动将emp_id映射为实体的empId -->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <!--启用延迟加载-->
+        <setting name="lazyLoadingEnabled" value="true"/>
+    </settings>
+    <!--typeAliases 是一个用于定义类型别名的配置项。它的作用是为 Java 类型指定一个简短的别名，从而在 MyBatis 的 XML 映射文件中可以更方便地引用这些类型，而不需要写完整的类名。-->
+    <typeAliases>
+        <typeAlias type="com.luotao.domian.Employ" alias="我是在mybatis配置文件中定义的Employ的别名"/>
+        <!-- package name批量注册 com.luotao.domian 包及其子包下的所有类为类型别名,别名即为类名(首字母可小写)，简化了类型引用的配置，提高了配置文件的简洁性和可维护性    -->
+        <package name="com.luotao.domian"/>
+    </typeAliases>
+    <!--
+        <environments> 定义多个数据库环境，其中 default 属性指定默认使用的环境。
+        在生产环境中，可以配置多个环境（如 dev、test、prod），并在不同环境下切换使用。
+    -->
+    <environments default="dev">
+        <!--
+            <environment> 定义一个具体的数据库环境，id 属性是该环境的唯一标识。
+            这里定义了一个名为 "dev" 的开发环境。
+        -->
+        <environment id="dev">
+            <!--
+                <transactionManager> 定义事务管理器的类型。
+                type="JDBC" 表示使用 JDBC 的事务管理，默认情况下 MyBatis 使用 JDBC 的事务管理。
+            -->
+            <transactionManager type="JDBC"/>
+
+            <!--
+                <dataSource> 定义数据源的类型。
+                type="POOLED" 表示使用连接池数据源，MyBatis 提供了三种数据源类型：
+                    - UNPOOLED：非连接池数据源，每次请求都会创建一个新的数据库连接。
+                    - POOLED：连接池数据源，可以复用数据库连接，提高性能。
+                    - JNDI：通过 JNDI 获取数据源，通常用于企业级应用。
+            -->
+            <dataSource type="POOLED">
+                <!--
+                    <property> 用于配置数据源的属性。
+                    name 属性指定属性名称，value 属性指定属性值。
+                -->
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <!-- 指定 MySQL 数据库驱动类 -->
+
+                <property name="url" value="jdbc:mysql:///mybatis-example"/>
+                <!-- 指定数据库连接 URL，这里连接到名为 "mybatis-example" 的 MySQL 数据库 -->
+
+                <property name="username" value="root"/>
+                <!-- 指定数据库用户名 -->
+
+                <property name="password" value="kuroneko.678"/>
+                <!-- 指定数据库密码 -->
+            </dataSource>
+        </environment>
+    </environments>
+
+
+    <mappers>
+        <!-- 注册映射文件，生成的代理类的实现细节在`EmpMapper.xml`中
+        通过该配置，MyBatis会将EmpMapper.xml中定义的SQL语句与com.luotao.mapper.EmpMapper接口方法绑定-->
+<!--        <mapper resource="com/luotao/mapper/EmpMapper.xml"/>-->
+<!--        <mapper resource="com/luotao/mapper/TeacherMapper.xml"/>-->
+<!--        <mapper resource="com/luotao/mapper/StudentMapper.xml"/>-->
+        <!--  批量注册mapper      -->
+        <package name="com.luotao.mapper"/>
+    </mappers>
+</configuration>

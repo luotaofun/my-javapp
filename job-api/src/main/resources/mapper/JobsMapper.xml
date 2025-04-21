@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.luotao.job.mapper.JobsMapper">
+
+    <resultMap id="BaseResultMap" type="com.luotao.job.domain.Jobs">
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <result property="jobTitle" column="job_title" jdbcType="VARCHAR"/>
+        <result property="categoryName" column="category_name" jdbcType="VARCHAR"/>
+        <result property="salary" column="salary" jdbcType="VARCHAR"/>
+        <result property="city" column="city" jdbcType="VARCHAR"/>
+        <result property="jobDesc" column="job_desc" jdbcType="VARCHAR"/>
+        <result property="company" column="company" jdbcType="VARCHAR"/>
+        <result property="companyInfo" column="company_info" jdbcType="VARCHAR"/>
+        <result property="author" column="author" jdbcType="VARCHAR"/>
+        <result property="authorPhoto" column="author_photo" jdbcType="VARCHAR"/>
+        <result property="publishTime" column="publish_time" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id
+        ,job_title,category_name,
+        salary,city,job_desc,
+        company,company_info,author,
+        author_photo,publish_time
+    </sql>
+    <select id="countByCategoryName" resultType="com.luotao.job.vo.JobsByCategoryVo">
+        select js.category_name, jc.category_desc, count(js.id) as quantity
+        from jobs js
+                 left join
+             job_category jc on js.category_name = jc.category_name
+        group by js.category_name
+        order by quantity desc
+
+    </select>
+    <select id="countByCity" resultType="com.luotao.job.vo.JobsByCityVo">
+        select js.city, jc.category_desc, count(js.id) as quantity
+        from jobs js
+                 left join
+             job_category jc on js.category_name = jc.category_name
+        group by city
+        order by quantity desc
+    </select>
+    <select id="countByProvince" resultType="com.luotao.job.vo.JobsByProvinceVo">
+        SELECT
+            c.province,
+            COUNT(js.id) AS quantity
+        FROM
+            jobs js
+                LEFT JOIN
+            city c
+            ON
+                (js.city LIKE CONCAT('%', c.city, '%') OR js.city LIKE CONCAT('%', c.province, '%'))
+        WHERE
+            c.province IS NOT NULL
+          AND c.province != ''
+        GROUP BY
+            c.province
+        ORDER BY
+            quantity DESC;
+    </select>
+</mapper>

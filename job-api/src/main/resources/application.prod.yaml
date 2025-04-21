@@ -1,0 +1,55 @@
+# 应用服务 WEB 访问端口
+server:
+  port: 8000
+
+# 数据库
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/job?serverTimezone=Asia/Shanghai
+    username: root
+    password: kuroneko.678
+  mvc:
+    # Spring MVC 的路径匹配策略
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  servlet:
+    multipart:
+      max-file-size: 10MB        # 单个文件大小限制
+      max-request-size: 20MB    # 总请求大小限制
+      enabled: true              # 开启文件上传
+
+# 日志输出目录
+logging:
+  file:
+    path: ./logs
+
+# 添加 MyBatis-Plus 配置
+mybatis-plus:
+  # 指定Mapper XML文件的位置
+  mapper-locations: classpath:/mapper/**/*.xml
+
+  configuration:
+    # 开启驼峰命名转换，例如：数据库字段名 user_name 自动映射到实体类属性 userName
+    map-underscore-to-camel-case: true
+
+  global-config:
+    db-config:
+      # 主键生成策略为自增
+      id-type: auto
+
+# 自定义文件上传配置
+file:
+  upload:
+    path: ./uploads/markdown/    # 文件上传根路径
+    allowed-types:              # 允许上传的文件类型
+      - .md
+      - .markdown
+      - .png
+      - .jpg
+
+# JWT（JSON Web Token）配置
+jwt:
+  secret: "12345678901234567890123456789012" # 至少32字符的密钥,如果JWT的头部或负载被修改，重新生成的签名将与原始签名不同，从而检测到篡改。
+  expiration: 86400 # token有效期(秒)，默认24小时
+
