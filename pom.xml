@@ -17,6 +17,7 @@
         <module>job-api</module>
         <module>mybatis-dynamic-sql</module>
         <module>spring-base</module>
+        <module>java-base</module>
     </modules>
 
     <!-- 属性集中管理 -->
