@@ -76,7 +76,7 @@ hs_err_pid*                # Java 虚拟机崩溃时产生的错误日志文件
 # IntelliJ IDEA 特定文件 (如果 .idea/ 未完全覆盖)
 *.iws                      # IntelliJ IDEA 旧版工作区文件
 *.ipr                      # IntelliJ IDEA 旧版项目文件
-
+/.idea/
 # Eclipse 特定文件
 .classpath                 # Eclipse 项目类路径文件
 .project                   # Eclipse 项目配置文件
@@ -88,4 +88,5 @@ build/                     # NetBeans 构建输出目录 (可能与通用规则�
 nbbuild/                   # NetBeans 构建相关文件
 dist/                      # NetBeans 打包输出目录 (可能与通用规则重复)
 nbdist/                    # NetBeans 打包相关文件
-.nb-gradle/                # NetBeans Gradle 相关文件 
+.nb-gradle/                # NetBeans Gradle 相关文件
+

@@ -9,6 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="mybatis-base" />
         <module name="java-base" />
+        <module name="database-mysql" />
         <module name="spring-base" />
         <module name="job-api" />
         <module name="mybatis-dynamic-sql" />

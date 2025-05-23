@@ -13,9 +13,9 @@
     </parent>
 
     <!-- 子模块基本信息 -->
-    <artifactId>job-app</artifactId>
+    <artifactId>job-api</artifactId>
     <packaging>jar</packaging> <!-- 这个模块是可执行的 Jar 包 -->
-    <name>job-app</name>
+    <name>job-api</name>
     <description>Job Management System - Application Module</description>
 
     <!-- 依赖声明 (从父模块继承版本和作用域) -->
