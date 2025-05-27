@@ -19,6 +19,7 @@
         <module>spring-base</module>
         <module>java-base</module>
         <module>database-mysql</module>
+        <module>redis-base</module>
     </modules>
 
     <!-- 属性集中管理 -->

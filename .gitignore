@@ -91,3 +91,8 @@ nbdist/                    # NetBeans 打包相关文件
 .nb-gradle/                # NetBeans Gradle 相关文件
 
 target/
+/.cursor/
+idea/
+/.trae/
+/.windsurf/
+
