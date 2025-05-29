@@ -1,0 +1,17 @@
+# 应用服务 WEB 访问端口
+server:
+  port: 8081
+
+
+spring:
+  application:
+    name: ms-users
+
+# 配置 Eureka Server 注册中心
+eureka:
+  instance:
+    prefer-ip-address: true # 注册服务时使用 IP 地址而不是主机名
+    instance-id: ${spring.cloud.client.ip-address}:${server.port} # 设置为 IP:端口
+  client:
+    service-url:
+      defaultZone: http://localhost:8000/eureka/ # 注册中心的地址

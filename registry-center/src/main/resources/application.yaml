@@ -1,0 +1,16 @@
+# 应用服务 WEB 访问端口
+server:
+  port: 8000
+
+
+spring:
+  application:
+    name: registry-center
+
+# 配置 Eureka Server 注册中心
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://localhost:8000/eureka/

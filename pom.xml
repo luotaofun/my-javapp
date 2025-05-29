@@ -20,6 +20,12 @@
         <module>java-base</module>
         <module>database-mysql</module>
         <module>redis-base</module>
+        <module>registry-center</module>
+        <module>gateway</module>
+        <module>gateway</module>
+        <module>gateway</module>
+        <module>gateway</module>
+        <module>ms-users</module>
     </modules>
 
     <!-- 属性集中管理 -->
@@ -34,10 +40,11 @@
 		<lombok.version>1.18.30</lombok.version>
 		<slf4j.version>1.7.36</slf4j.version>
 		<knife4j.version>3.0.3</knife4j.version>
-		<spring-boot.version>2.7.6</spring-boot.version>
+		<spring-boot.version>2.5.15</spring-boot.version>
 		<mybatisplus.version>3.5.5</mybatisplus.version>
 		<jjwt.version>0.11.5</jjwt.version>
 		<mybatis.version>3.5.11</mybatis.version>
+		<spring-cloud.version>2020.0.6</spring-cloud.version>
     </properties>
 
     <!-- 依赖管理 (父模块只负责声明版本和作用域，子模块需要用时只需声明 groupId 和 artifactId 即可，无需重复写版本号和作用域，保证了版本统一。) -->
@@ -48,6 +55,15 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
                 <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- Spring Cloud 依赖管理 -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

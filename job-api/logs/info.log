@@ -1,0 +1,70 @@
+2025-05-28 14:32:19.828 [background-preinit] INFO  org.hibernate.validator.internal.util.Version:21 - HV000001: Hibernate Validator 6.2.5.Final
+2025-05-28 14:32:19.832 [main] INFO  com.luotao.job.JobApplicationTests:55 - Starting JobApplicationTests using Java 1.8.0_31 on T with PID 8448 (started by T in D:\workspace\java-projects\my-blog\my-javapp\job-api)
+2025-05-28 14:32:19.834 [main] INFO  com.luotao.job.JobApplicationTests:631 - No active profile set, falling back to 1 default profile: "default"
+2025-05-28 14:32:21.350 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:262 - Multiple Spring Data modules found, entering strict repository configuration mode
+2025-05-28 14:32:21.354 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:132 - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-05-28 14:32:21.441 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:201 - Finished Spring Data repository scanning in 69 ms. Found 0 Redis repository interfaces.
+2025-05-28 14:32:28.544 [main] INFO  com.luotao.job.JobApplicationTests:61 - Started JobApplicationTests in 9.329 seconds (JVM running for 11.082)
+2025-05-28 14:45:17.822 [main] INFO  com.luotao.job.JobApplicationTests:55 - Starting JobApplicationTests using Java 1.8.0_31 on T with PID 4688 (started by T in D:\workspace\java-projects\my-blog\my-javapp\job-api)
+2025-05-28 14:45:17.825 [main] INFO  com.luotao.job.JobApplicationTests:631 - No active profile set, falling back to 1 default profile: "default"
+2025-05-28 14:45:17.825 [background-preinit] INFO  org.hibernate.validator.internal.util.Version:21 - HV000001: Hibernate Validator 6.2.5.Final
+2025-05-28 14:45:19.591 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:262 - Multiple Spring Data modules found, entering strict repository configuration mode
+2025-05-28 14:45:19.596 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:132 - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-05-28 14:45:19.688 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:201 - Finished Spring Data repository scanning in 73 ms. Found 0 Redis repository interfaces.
+2025-05-28 14:45:27.227 [main] INFO  com.luotao.job.JobApplicationTests:61 - Started JobApplicationTests in 9.896 seconds (JVM running for 11.11)
+2025-05-28 14:50:39.310 [background-preinit] INFO  org.hibernate.validator.internal.util.Version:21 - HV000001: Hibernate Validator 6.2.5.Final
+2025-05-28 14:50:39.629 [main] INFO  com.luotao.job.JobApplicationTests:55 - Starting JobApplicationTests using Java 1.8.0_31 on T with PID 844 (started by T in D:\workspace\java-projects\my-blog\my-javapp\job-api)
+2025-05-28 14:50:39.631 [main] INFO  com.luotao.job.JobApplicationTests:631 - No active profile set, falling back to 1 default profile: "default"
+2025-05-28 14:50:41.212 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:262 - Multiple Spring Data modules found, entering strict repository configuration mode
+2025-05-28 14:50:41.216 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:132 - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-05-28 14:50:41.338 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:201 - Finished Spring Data repository scanning in 16 ms. Found 0 Redis repository interfaces.
+2025-05-28 14:50:50.505 [main] INFO  com.luotao.job.JobApplicationTests:61 - Started JobApplicationTests in 11.705 seconds (JVM running for 12.912)
+2025-05-28 14:53:27.122 [main] INFO  com.luotao.job.JobApplicationTests:55 - Starting JobApplicationTests using Java 1.8.0_31 on T with PID 19764 (started by T in D:\workspace\java-projects\my-blog\my-javapp\job-api)
+2025-05-28 14:53:27.124 [background-preinit] INFO  org.hibernate.validator.internal.util.Version:21 - HV000001: Hibernate Validator 6.2.5.Final
+2025-05-28 14:53:27.125 [main] INFO  com.luotao.job.JobApplicationTests:631 - No active profile set, falling back to 1 default profile: "default"
+2025-05-28 14:53:28.727 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:262 - Multiple Spring Data modules found, entering strict repository configuration mode
+2025-05-28 14:53:28.730 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:132 - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-05-28 14:53:28.810 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:201 - Finished Spring Data repository scanning in 11 ms. Found 0 Redis repository interfaces.
+2025-05-28 14:53:37.807 [main] INFO  com.luotao.job.JobApplicationTests:61 - Started JobApplicationTests in 11.241 seconds (JVM running for 12.476)
+2025-05-28 14:55:04.335 [background-preinit] INFO  org.hibernate.validator.internal.util.Version:21 - HV000001: Hibernate Validator 6.2.5.Final
+2025-05-28 14:55:04.336 [main] INFO  com.luotao.job.JobApplicationTests:55 - Starting JobApplicationTests using Java 1.8.0_31 on T with PID 17756 (started by T in D:\workspace\java-projects\my-blog\my-javapp\job-api)
+2025-05-28 14:55:04.337 [main] INFO  com.luotao.job.JobApplicationTests:631 - No active profile set, falling back to 1 default profile: "default"
+2025-05-28 14:55:06.179 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:262 - Multiple Spring Data modules found, entering strict repository configuration mode
+2025-05-28 14:55:06.186 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:132 - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-05-28 14:55:06.275 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:201 - Finished Spring Data repository scanning in 13 ms. Found 0 Redis repository interfaces.
+2025-05-28 14:55:14.772 [main] INFO  com.luotao.job.JobApplicationTests:61 - Started JobApplicationTests in 10.947 seconds (JVM running for 12.203)
+2025-05-28 14:59:34.864 [main] INFO  com.luotao.job.JobApplicationTests:55 - Starting JobApplicationTests using Java 1.8.0_31 on T with PID 13292 (started by T in D:\workspace\java-projects\my-blog\my-javapp\job-api)
+2025-05-28 14:59:34.866 [main] INFO  com.luotao.job.JobApplicationTests:631 - No active profile set, falling back to 1 default profile: "default"
+2025-05-28 14:59:34.868 [background-preinit] INFO  org.hibernate.validator.internal.util.Version:21 - HV000001: Hibernate Validator 6.2.5.Final
+2025-05-28 14:59:36.414 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:262 - Multiple Spring Data modules found, entering strict repository configuration mode
+2025-05-28 14:59:36.420 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:132 - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-05-28 14:59:36.509 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:201 - Finished Spring Data repository scanning in 14 ms. Found 0 Redis repository interfaces.
+2025-05-28 14:59:45.623 [main] INFO  com.luotao.job.JobApplicationTests:61 - Started JobApplicationTests in 11.238 seconds (JVM running for 12.366)
+2025-05-28 15:00:18.109 [main] INFO  com.luotao.job.JobApplicationTests:55 - Starting JobApplicationTests using Java 1.8.0_31 on T with PID 3908 (started by T in D:\workspace\java-projects\my-blog\my-javapp\job-api)
+2025-05-28 15:00:18.111 [background-preinit] INFO  org.hibernate.validator.internal.util.Version:21 - HV000001: Hibernate Validator 6.2.5.Final
+2025-05-28 15:00:18.111 [main] INFO  com.luotao.job.JobApplicationTests:631 - No active profile set, falling back to 1 default profile: "default"
+2025-05-28 15:00:19.488 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:262 - Multiple Spring Data modules found, entering strict repository configuration mode
+2025-05-28 15:00:19.491 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:132 - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-05-28 15:00:19.590 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:201 - Finished Spring Data repository scanning in 12 ms. Found 0 Redis repository interfaces.
+2025-05-28 15:00:29.142 [main] INFO  com.luotao.job.JobApplicationTests:61 - Started JobApplicationTests in 11.531 seconds (JVM running for 12.686)
+2025-05-28 15:04:19.350 [main] INFO  com.luotao.job.JobApplicationTests:55 - Starting JobApplicationTests using Java 1.8.0_31 on T with PID 10700 (started by T in D:\workspace\java-projects\my-blog\my-javapp\job-api)
+2025-05-28 15:04:19.351 [background-preinit] INFO  org.hibernate.validator.internal.util.Version:21 - HV000001: Hibernate Validator 6.2.5.Final
+2025-05-28 15:04:19.353 [main] INFO  com.luotao.job.JobApplicationTests:631 - No active profile set, falling back to 1 default profile: "default"
+2025-05-28 15:04:21.022 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:262 - Multiple Spring Data modules found, entering strict repository configuration mode
+2025-05-28 15:04:21.027 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:132 - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-05-28 15:04:21.117 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:201 - Finished Spring Data repository scanning in 14 ms. Found 0 Redis repository interfaces.
+2025-05-28 15:04:29.863 [main] INFO  com.luotao.job.JobApplicationTests:61 - Started JobApplicationTests in 11.069 seconds (JVM running for 12.218)
+2025-05-28 15:05:01.314 [background-preinit] INFO  org.hibernate.validator.internal.util.Version:21 - HV000001: Hibernate Validator 6.2.5.Final
+2025-05-28 15:05:01.315 [main] INFO  com.luotao.job.JobApplicationTests:55 - Starting JobApplicationTests using Java 1.8.0_31 on T with PID 9624 (started by T in D:\workspace\java-projects\my-blog\my-javapp\job-api)
+2025-05-28 15:05:01.317 [main] INFO  com.luotao.job.JobApplicationTests:631 - No active profile set, falling back to 1 default profile: "default"
+2025-05-28 15:05:02.760 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:262 - Multiple Spring Data modules found, entering strict repository configuration mode
+2025-05-28 15:05:02.765 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:132 - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-05-28 15:05:02.873 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:201 - Finished Spring Data repository scanning in 84 ms. Found 0 Redis repository interfaces.
+2025-05-28 15:05:09.110 [main] INFO  com.luotao.job.JobApplicationTests:61 - Started JobApplicationTests in 8.291 seconds (JVM running for 9.348)
+2025-05-28 15:10:28.118 [main] INFO  com.luotao.job.JobApplicationTests:55 - Starting JobApplicationTests using Java 1.8.0_31 on T with PID 15512 (started by T in D:\workspace\java-projects\my-blog\my-javapp\job-api)
+2025-05-28 15:10:28.121 [main] INFO  com.luotao.job.JobApplicationTests:631 - No active profile set, falling back to 1 default profile: "default"
+2025-05-28 15:10:28.123 [background-preinit] INFO  org.hibernate.validator.internal.util.Version:21 - HV000001: Hibernate Validator 6.2.5.Final
+2025-05-28 15:10:29.649 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:262 - Multiple Spring Data modules found, entering strict repository configuration mode
+2025-05-28 15:10:29.655 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:132 - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-05-28 15:10:29.754 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:201 - Finished Spring Data repository scanning in 78 ms. Found 0 Redis repository interfaces.
+2025-05-28 15:10:37.898 [main] INFO  com.luotao.job.JobApplicationTests:61 - Started JobApplicationTests in 10.288 seconds (JVM running for 11.332)

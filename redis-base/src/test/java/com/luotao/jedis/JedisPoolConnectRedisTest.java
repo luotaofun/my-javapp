@@ -16,18 +16,17 @@ import redis.clients.jedis.Jedis;
 public class JedisPoolConnectRedisTest {
     Jedis jedis = null;
     @BeforeEach
-    public void init(){
-//        jedis = new Jedis("172.22.250.63", 6379);
+    public void initTest(){
+//        jedis = new Jedis("172.22.250.63", 6379); // 不使用连接池
         // 从连接池中获取 Jedis 连接对象
         jedis = JedisPoolConnectRedis.getJedis();
         jedis.auth("kuroneko.678");
-        // 心跳机制检测是否连接成功
-        System.out.println("jedis.ping() = " + jedis.ping());
+        System.out.println("心跳机制检测是否连接成功：" +jedis.ping());
     }
     @Test
-    public void test(){
+    public void stringTest(){
         // 选择库
-        jedis.select(1);
+        jedis.select(0);
         // 插入数据
         System.out.println(jedis.set("test:users:1", "neko"));
         // 获取数据

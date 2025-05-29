@@ -1,9 +1,20 @@
 # 应用服务 WEB 访问端口
 server:
-  port: 8001
+  port: 8080
+
+# 配置 Eureka Server 注册中心
+eureka:
+  instance:
+    prefer-ip-address: true # 注册服务时使用 IP 地址而不是主机名
+    instance-id: ${spring.cloud.client.ip-address}:${server.port} # 设置为 IP:端口
+  client:
+    service-url:
+      defaultZone: http://localhost:8000/eureka/ # 注册中心的地址
 
 # 数据库
 spring:
+  application:
+    name: job-api
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/job?serverTimezone=Asia/Shanghai
@@ -18,13 +29,33 @@ spring:
       max-file-size: 10MB        # 单个文件大小限制
       max-request-size: 20MB    # 总请求大小限制
       enabled: true              # 开启文件上传
+  # Redis配置
+  redis:
+    host: 172.22.250.63
+    port: 6379
+    password: kuroneko.678
+    # 使用的数据库索引
+    database: 0
+    # Jedis连接池配置,若要用 lettuce 连接池（线程安全）则需要配置commons-pool2依赖
+    #jedis:
+    lettuce:
+      pool:
+        # 最大活跃连接数
+        max-active: 8
+        # 最大空闲连接数
+        max-idle: 8
+        # 最小空闲连接数
+        min-idle: 0
+        # 获取连接的最大等待时间（毫秒）
+        max-wait: 1000
 
 # 日志输出目录
 logging:
   file:
     path: ./logs
   level:
-    org.springframework.boot.autoconfigure: DEBUG
+    #org.springframework.boot.autoconfigure: DEBUG
+    org.springframework.boot.autoconfigure: INFO
 
 # 添加 MyBatis-Plus 配置
 mybatis-plus:

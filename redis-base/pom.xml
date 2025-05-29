@@ -11,7 +11,7 @@
     <packaging>jar</packaging>
 
     <name>redis-base</name>
-    <description>redis 实战</description>
+    <description>jedis 客户端连接redis</description>
 
     <!-- 依赖声明 (从父模块继承版本和作用域) -->
     <dependencies>
