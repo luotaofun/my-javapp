@@ -1,0 +1,8 @@
+com\luotao\domian\TeacherProfile.class
+com\luotao\mapper\EmpMapper.class
+com\luotao\domian\Employ.class
+com\luotao\domian\Teacher.class
+com\luotao\mapper\StudentMapper.class
+com\luotao\Main.class
+com\luotao\mapper\TeacherMapper.class
+com\luotao\domian\Student.class

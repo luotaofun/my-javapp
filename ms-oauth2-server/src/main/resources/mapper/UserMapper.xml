@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.luotao.job.mapper.UserMapper">
+
+    <select id="selectByAccountInfo" resultType="com.luotao.commons.model.entity.Users">
+        select id,username,nickname,email,phone,create_date,update_date from t_users
+        where username=#{account} or  phone=#{account} or username=#{account}
+    </select>
+
+
+</mapper>

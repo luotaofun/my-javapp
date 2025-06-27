@@ -1,4 +1,8 @@
-D:\workspace\myBlog\job\mybatis-base\src\main\java\com\luotao\mapper\EmpMapper.java
-D:\workspace\myBlog\job\mybatis-base\src\main\java\com\luotao\plugin\SqlLogPlugin.java
-D:\workspace\myBlog\job\mybatis-base\src\main\java\com\luotao\Main.java
-D:\workspace\myBlog\job\mybatis-base\src\main\java\com\luotao\domian\Employ.java
+D:\workspace\java-projects\my-blog\my-javapp\mybatis-base\src\main\java\com\luotao\domian\TeacherProfile.java
+D:\workspace\java-projects\my-blog\my-javapp\mybatis-base\src\main\java\com\luotao\domian\Student.java
+D:\workspace\java-projects\my-blog\my-javapp\mybatis-base\src\main\java\com\luotao\domian\Teacher.java
+D:\workspace\java-projects\my-blog\my-javapp\mybatis-base\src\main\java\com\luotao\mapper\StudentMapper.java
+D:\workspace\java-projects\my-blog\my-javapp\mybatis-base\src\main\java\com\luotao\mapper\TeacherMapper.java
+D:\workspace\java-projects\my-blog\my-javapp\mybatis-base\src\main\java\com\luotao\Main.java
+D:\workspace\java-projects\my-blog\my-javapp\mybatis-base\src\main\java\com\luotao\domian\Employ.java
+D:\workspace\java-projects\my-blog\my-javapp\mybatis-base\src\main\java\com\luotao\mapper\EmpMapper.java
