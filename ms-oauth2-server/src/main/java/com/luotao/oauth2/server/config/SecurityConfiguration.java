@@ -21,16 +21,16 @@ import javax.annotation.Resource;
 public class SecurityConfiguration {
 
     // 注入 Redis 连接工厂
-    @Resource
+/*    @Resource
     private RedisConnectionFactory redisConnectionFactory;
 
     // 初始化 RedisTokenStore 用于将 token 存储至 Redis
-    // @Bean // Temporarily commented out as new Authorization Server uses OAuth2AuthorizationService
-    // public RedisTokenStore redisTokenStore() {
-    //     RedisTokenStore redisTokenStore = new RedisTokenStore(redisConnectionFactory);
-    //     redisTokenStore.setPrefix("TOKEN:"); // 设置key的层级前缀，方便查询
-    //     return redisTokenStore;
-    // }
+     @Bean // Temporarily commented out as new Authorization Server uses OAuth2AuthorizationService
+     public RedisTokenStore redisTokenStore() {
+         RedisTokenStore redisTokenStore = new RedisTokenStore(redisConnectionFactory);
+         redisTokenStore.setPrefix("TOKEN:"); // 设置key的层级前缀，方便查询
+         return redisTokenStore;
+     }*/
 
     // 初始化密码编码器，用 MD5 加密密码 (注意：MD5 不安全，生产环境建议使用 BCryptPasswordEncoder)
     @Bean

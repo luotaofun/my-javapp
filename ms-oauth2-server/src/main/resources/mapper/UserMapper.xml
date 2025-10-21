@@ -6,7 +6,7 @@
 
     <select id="selectByAccountInfo" resultType="com.luotao.commons.model.entity.Users">
         select id,username,nickname,email,phone,create_date,update_date from t_users
-        where username=#{account} or  phone=#{account} or username=#{account}
+        where (username=#{account} or  phone=#{account} or username=#{account})
     </select>
 
 

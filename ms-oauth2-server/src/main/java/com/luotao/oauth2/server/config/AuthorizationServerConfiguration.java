@@ -44,7 +44,7 @@ import java.util.UUID;
  * 授权服务配置 (Spring Authorization Server 0.4.0)
  */
 @Configuration
-public class AuthorizationServerConfiguration {
+public class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter{
 
     @Resource
     private PasswordEncoder passwordEncoder;
@@ -54,135 +54,9 @@ public class AuthorizationServerConfiguration {
 
     // UserService 实现了 Spring Security 的 UserDetailsService
     @Resource
-    private UserService userService; 
+    private UserService userService;
 
-    @Bean
-    @Order(Ordered.HIGHEST_PRECEDENCE)
-    public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http) throws Exception {
-        OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http);
-        http.getConfigurer(OAuth2AuthorizationServerConfigurer.class)
-            .oidc(Customizer.withDefaults()); // Enable OpenID Connect 1.0
-        http
-            .exceptionHandling(exceptions ->
-                exceptions.authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/login"))
-            )
-            .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt);
-        return http.build();
-    }
 
-    @Bean
-    public RegisteredClientRepository registeredClientRepository() {
-        RegisteredClient registeredClient = RegisteredClient.withId(UUID.randomUUID().toString())
-                .clientId(clientOAuth2DataConfiguration.getClientId())
-                .clientSecret(passwordEncoder.encode(clientOAuth2DataConfiguration.getSecret()))
-                .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
-                .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_POST)
-                .authorizationGrantTypes(grantTypesConsumer -> {
-                    if (clientOAuth2DataConfiguration.getGrantTypes() != null) {
-                        for (String grantType : clientOAuth2DataConfiguration.getGrantTypes()) {
-                            grantType = grantType.trim();
-                            if (AuthorizationGrantType.AUTHORIZATION_CODE.getValue().equalsIgnoreCase(grantType)) {
-                                grantTypesConsumer.add(AuthorizationGrantType.AUTHORIZATION_CODE);
-                            }
-                            if (AuthorizationGrantType.REFRESH_TOKEN.getValue().equalsIgnoreCase(grantType)) {
-                                grantTypesConsumer.add(AuthorizationGrantType.REFRESH_TOKEN);
-                            }
-                            if (AuthorizationGrantType.CLIENT_CREDENTIALS.getValue().equalsIgnoreCase(grantType)) {
-                                grantTypesConsumer.add(AuthorizationGrantType.CLIENT_CREDENTIALS);
-                            }
-                            if (AuthorizationGrantType.PASSWORD.getValue().equalsIgnoreCase(grantType)) {
-                                grantTypesConsumer.add(AuthorizationGrantType.PASSWORD);
-                            }
-                        }
-                    }
-                })
-                .redirectUris(urisConsumer -> {
-                    String[] redirectUrisFromConfig = clientOAuth2DataConfiguration.getRedirectUris();
-                    if (redirectUrisFromConfig != null && redirectUrisFromConfig.length > 0) {
-                        for (String uri : redirectUrisFromConfig) {
-                            if (uri != null && !uri.trim().isEmpty()) {
-                                urisConsumer.add(uri.trim());
-                            }
-                        }
-                    } else {
-                        System.err.println("Warning: No redirect URIs configured for client " + clientOAuth2DataConfiguration.getClientId() + ". Using default: http://127.0.0.1/login/oauth2/code/" + clientOAuth2DataConfiguration.getClientId());
-                        urisConsumer.add("http://127.0.0.1/login/oauth2/code/" + clientOAuth2DataConfiguration.getClientId());
-                    }
-                })
-                .scopes(scopesConsumer -> {
-                     if (clientOAuth2DataConfiguration.getScopes() != null) {
-                        for (String scope : clientOAuth2DataConfiguration.getScopes()) {
-                            scope = scope.trim();
-                            scopesConsumer.add(scope);
-                            if (OidcScopes.OPENID.equalsIgnoreCase(scope)) scopesConsumer.add(OidcScopes.OPENID);
-                            if (OidcScopes.PROFILE.equalsIgnoreCase(scope)) scopesConsumer.add(OidcScopes.PROFILE);
-                        }
-                     }
-                })
-                .tokenSettings(TokenSettings.builder()
-                    .accessTokenTimeToLive(Duration.ofSeconds(clientOAuth2DataConfiguration.getTokenValidityTime()))
-                    .refreshTokenTimeToLive(Duration.ofSeconds(clientOAuth2DataConfiguration.getRefreshTokenValidityTime()))
-                    .build()
-                )
-                .clientSettings(ClientSettings.builder().requireAuthorizationConsent(true).build())
-                .build();
 
-        return new InMemoryRegisteredClientRepository(registeredClient);
-    }
 
-    @Bean
-    public OAuth2AuthorizationService authorizationService() {
-        // TODO: Replace with Redis-backed OAuth2AuthorizationService in production
-        return new InMemoryOAuth2AuthorizationService();
-    }
-
-    @Bean
-    public OAuth2AuthorizationConsentService authorizationConsentService() {
-        // TODO: Replace with Redis-backed OAuth2AuthorizationConsentService in production if needed
-        return new InMemoryOAuth2AuthorizationConsentService();
-    }
-
-    @Bean
-    public JWKSource<SecurityContext> jwkSource() {
-        RSAKey rsaKey = generateRsa();
-        JWKSet jwkSet = new JWKSet(rsaKey);
-        return (jwkSelector, securityContext) -> jwkSelector.select(jwkSet);
-    }
-
-    private static RSAKey generateRsa() {
-        KeyPair keyPair = generateRsaKey();
-        RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();
-        RSAPrivateKey privateKey = (RSAPrivateKey) keyPair.getPrivate();
-        return new RSAKey.Builder(publicKey)
-                .privateKey(privateKey)
-                .keyID(UUID.randomUUID().toString())
-                .build();
-    }
-
-    private static KeyPair generateRsaKey() {
-        KeyPair keyPair;
-        try {
-            KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
-            keyPairGenerator.initialize(2048);
-            keyPair = keyPairGenerator.generateKeyPair();
-        } catch (Exception ex) {
-            throw new IllegalStateException(ex);
-        }
-        return keyPair;
-    }
-
-    @Bean
-    public JwtDecoder jwtDecoder(JWKSource<SecurityContext> jwkSource) {
-        return OAuth2AuthorizationServerConfiguration.jwtDecoder(jwkSource);
-    }
-
-    @Bean
-    public AuthorizationServerSettings authorizationServerSettings() {
-        // Customize issuer URL and endpoints if needed
-        // Example: .issuer("http://auth-server:9000")
-        return AuthorizationServerSettings.builder().build();
-    }
-
-    // UserDetailsService is already provided by UserService and injected into SecurityConfiguration
-    // No need to redefine it here if SecurityConfiguration handles AuthenticationManager correctly.
 }
