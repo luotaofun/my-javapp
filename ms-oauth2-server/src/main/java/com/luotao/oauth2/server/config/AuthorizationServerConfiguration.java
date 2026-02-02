@@ -44,7 +44,7 @@ import java.util.UUID;
  * 授权服务配置 (Spring Authorization Server 0.4.0)
  */
 @Configuration
-public class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter{
+public class AuthorizationServerConfiguration {
 
     @Resource
     private PasswordEncoder passwordEncoder;
